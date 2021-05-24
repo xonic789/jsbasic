@@ -13,9 +13,8 @@ class Queue{
     }
 
     enqueue(data){
-        // append를 호출 할 때, 맨 처음 생성 당시의 값.
-        // head
-        // tail
+        // head 큐의 가장 첫번째 노드
+        // tail 큐의 가장 마지막 노드
         const node = new Node(data);
         let current = this._head;
         // head가 null이나 undefined면 들어옴.
@@ -59,7 +58,6 @@ class Queue{
         let currentIndex = 0;
         // index일 때까지 반복문 수행
         while (currentIndex <= index){
-
             if (currentIndex === index){
                 return current.data;
             }else {
