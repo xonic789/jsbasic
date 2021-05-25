@@ -20,7 +20,7 @@ function solution(participant, completion) {
 
     for (let name of participant){
         if (tempArray[name] >= 1){
-            answer = name;
+            answer = name; 
         }
     }
 
