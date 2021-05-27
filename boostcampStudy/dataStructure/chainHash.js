@@ -8,6 +8,15 @@ class Node{
 }
 class Hashchain{
 
+    /* 
+     *  This is HashTable Object class.
+        Hash collision is implemented as a linked list using pointers.
+
+
+        put O(1) (hash collision O(n))
+        remove O(1) (hash collision O(n))
+        get O(1) (hash collision O(n))
+    */  
     constructor(size){
         
         // bucket으로 쓸 array를 소수로 초기화 하는 과정.
@@ -34,11 +43,11 @@ class Hashchain{
             // next pointer가 null이라면
             if (!item){
                 this.array[hashKey].next = node;
-                console.log(this.array[hashKey]);
             }else {
                 while (item){
                     if (!item.next){
                         item.next = node;
+                        break;
                     }else {
                         item = item.next;
                     }
@@ -50,6 +59,7 @@ class Hashchain{
 
     #hash(item){
         if (typeof item === 'number'){
+            console.log(`hashKey ${hashKey}`);
             return item % this.size;        
         }else if(typeof item === 'string' ){
             let sum = 0;
@@ -61,6 +71,10 @@ class Hashchain{
             console.log('해당 key는 number 또는 string이 아닙니다.');
             return -1;
         }
+    }
+
+    checkKey(key){
+        return key === -1;
     }
  
     get(key){
@@ -100,30 +114,58 @@ class Hashchain{
         }
         let item = this.array[hashKey];
         if (!item){
-            
+            console.log("해당 key는 존재하지 않습니다.");
+            return;
+        }else{
+            if (key == item.key){
+                this.array[hashKey] = null;
+            }else{
+                let current = item.next;
+                while (current){
+                    if (current.key === key){
+                        item.next = null;
+                        break;
+                    }else {
+                        current = current.next;
+                    }
+                }
+            }
         }
-
-
     }
 
-    checkKey(key){
-        return key === -1;
-    }
 
-    
-
-
-    
-    
 }
 
 const hashChain = new Hashchain();
 
 hashChain.put(0,'첫번째');
 hashChain.put(13,'첫번째첫번째');
-hashChain.put(true,'두번째');
+hashChain.put(26,'첫번째첫번째하이');
 hashChain.put(2,'세번째');
 hashChain.put(3,'네번째');
 hashChain.put(4,'다섯번째');
-
 console.log(`get ${hashChain.get(0)}`);
+console.log(`get ${hashChain.get(13)}`);
+console.log(`get ${hashChain.get(26)}`);
+
+const hashChain2 = new Hashchain();
+
+hashChain2.put('첫번째',1);
+hashChain2.put('두번째',2);
+hashChain2.put('세번째',3);
+hashChain2.put('네번째',4);
+hashChain2.put('다섯번째',5);
+
+console.log(`get value is ${hashChain2.get('첫번째')}`);
+console.log(`get value is ${hashChain2.get('두번째')}`);
+console.log(`get value is ${hashChain2.get('세번째')}`);
+console.log(`get value is ${hashChain2.get('네번째')}`);
+console.log(`get value is ${hashChain2.get('다섯번째')}`);
+
+hashChain2.remove('첫번째');
+hashChain2.remove('두번째');
+
+console.log(`get key ${hashChain2.get('첫번째')}`);
+console.log(`get key ${hashChain2.get('두번째')}`);
+
+
