@@ -1,4 +1,4 @@
-function binarySearchFindBy(key,array){
+function binarySearch(key,array){
     let least = 0;
     let large = array.length - 1;
     
@@ -31,6 +31,25 @@ function binarySearchFindBy(key,array){
     return -1;
 }
 
+function recursiveBinarySearch(array,begin,end,target){
+    let middle = Math.floor((begin+end)/2);
+
+    if (begin>end){
+        return -1;
+    }
+    if (array[middle] === target){
+        return middle;
+    }else if (array[middle] < target){
+        return recursiveBinarySearch(array, middle + 1, end, target);
+    }else{
+        return recursiveBinarySearch(array, begin, middle - 1, target);
+    }
+
+}
+
 array = [1, 2, 4, 6, 8, 9];
 
-console.log(binarySearchFindBy(6,array));
+console.log(recursiveBinarySearch(array,0,array.length-1,0));
+
+
+console.log(binarySearch(6,array));
