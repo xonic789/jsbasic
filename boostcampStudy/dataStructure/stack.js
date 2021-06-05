@@ -23,10 +23,7 @@ class Stack{
                 this.push(item);
             }
         }
-        
     }
-
-
     /*
     * const stack = new Stack();
     * top : null
@@ -77,39 +74,45 @@ class Stack{
 
     // 참조
     peek(){
-        this.checkTop();
         return this.top.item;
     }
     
 }
 
 //var, let, const
-const stack = new Stack();
-const stack1 = new Stack([1, 2, 3, 4, 5]);
 
 
-stack.push(1);
-stack.push(2);
-console.log(`stack length : ${stack.length}`);
-console.log(`stack pop : ${stack.pop()}`);
-console.log(`stack peek : ${stack.peek()}`);
+function solution(board, moves) {
+    var answer = 0;
+    let stack = new Stack();
+    
+    
+    for (let move of moves){
+        for (let i = 0; i < board.length; i++){
+            let doll = board[i][move - 1];
+            if (doll !== 0){
+                board[i][move - 1] = 0;
+                stack.push(doll);
+                if (stack.length >= 2){
+                    if (stack.top.next.item === doll){
+                        stack.pop();
+                        stack.pop();
+                        answer += 2;
+                    }
+                }
+                break;
+            }
+        }
+    }
+    
+    return answer;
+}
 
-console.log(`stack pop : ${stack.pop()}`);
-console.log(`stack pop : ${stack.pop()}`);
-console.log(`stack pop : ${stack.pop()}`);
-console.log(`stack pop : ${stack.pop()}`);
-console.log(`stack pop : ${stack.pop()}`);
-console.log(`stack peek : ${stack.peek()}`);
-// console.log(`stack length : ${stack.length}`);
-// console.log(`stack pop : ${stack.pop()}`);
-// console.log(`stack length : ${stack.length}`);
-// console.log(`stack pop : ${stack.pop()}`);
-// console.log(`stack length : ${stack.length}`);
-// console.log(`stack pop : ${stack.pop()}`);
-// console.log(`stack length : ${stack.length}`);
-// console.log(`stack pop : ${stack.pop()}`);
-// console.log(`stack length : ${stack.length}`);
-// console.log(`stack pop : ${stack.pop()}`);
-// console.log(`stack length : ${stack.length}`);
-// console.log(`stack pop : ${stack.pop()}`);
-
+console.log(solution(
+    [
+        [0,0,0,0,0],
+        [0,0,1,0,3],
+        [0,2,5,0,1],
+        [4,2,4,4,2],
+        [3,5,1,3,1]],
+        [1,5,3,5,1,2,1,4]));

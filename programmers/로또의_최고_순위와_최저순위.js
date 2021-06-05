@@ -1,5 +1,5 @@
 function solution(lottos, win_nums) {
-    var answer = [];
+    var answer = [0, 0];
     let count = 0;
     let best = 0;
     let worst = 0;
@@ -18,12 +18,8 @@ function solution(lottos, win_nums) {
             }
         }
     }
-
-    let bestGrade = checkCount(best);
-    let worstGrade = checkCount(worst);
-    
-    answer.push(bestGrade);
-    answer.push(worstGrade);
+    answer[0] = checkCount(best);
+    answer[1] = checkCount(worst);
     
     
     return answer;
@@ -44,6 +40,7 @@ function checkCount(count){
         return 6;
     }
 }
+// 버블 정렬
 function sort(array){
     for (let i = 0; i < array.length; i++){
         for (let j = i + 1; j < array.length; j++){
