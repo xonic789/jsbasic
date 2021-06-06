@@ -41,7 +41,7 @@ function swap (array, start, end){
 console.log(array);
 quickSort(array, 0, array.length-1);
 console.log(array);
-
+ 
 
 
 
